@@ -15,17 +15,17 @@
                     {{ movie.title }}
                 </h2>
                 <p class=" w-11/12 md:w-5/12 font-medium text-white my-4">
-                    {{ movie.description | slice:":85" }}
+                    {{ movie.description | slice:":85" }}...
                 </p>
                 <div class="flex my-4">
-
+                    <a href="{% url 'core:play' movie_id=movie.uuid %}">
                     <button class="flex items-center bg-white py-2 px-5 rounded-md text-gray-900">
                         <ion-icon name="play" class="text-2xl"></ion-icon>
                         <span class="ml-3 font-medium text-gray-900">
                             Play
                         </span>
                     </button>
-
+                    </a>
                 </div>
             </div>
         </section> 
@@ -34,11 +34,28 @@
                 <h2 class="text-gray-200 text-3xl font-medium pb-3">
                     Description
                 </h2>
-                <div class="flex  items-center min-w-full  movie_lis">
+                <div class="flex  items-center min-w-full  movie_lis pb-8">
                     <p class="text-gray-100 text-lg">
                         {{ movie.description }}
                     </p>
                 </div>
+                {% if movie.type == 'seasonal' %}
+                    <div style="margin-top:2rem;margin-bottom:2rem">
+                        <h2 class="text-gray-200 text-3xl font-medium pb-3">
+                            Episode
+                        </h2>
+
+
+                        {% for episode in movie.videos.all  %}
+                        <h3 class = text-lg>
+                            <a class="text-blue-600" href="{% url 'core:play' movie_id=movie.uuid %}?epi={{ forloop.counter0 }}">
+                                {{ forloop.counter }} - {{ episode.title }}
+                            </a>
+                        </h3>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
             </div>
         </section>
     </main>

@@ -15,16 +15,17 @@
                     {{ show_case.title }}
                 </h2>
                 <p class=" w-11/12 md:w-5/12 font-medium text-white my-4">
-                    {{ show_case.description | slice:":85" }}
+                    {{ show_case.description | slice:":85" }}...
                 </p>
                 <div class="flex my-4">
-
+                    <a href="{% url 'core:play' movie_id=show_case.uuid %}">
                     <button class="flex items-center bg-white text-gray-900 py-2 px-5 rounded-md">
                         <ion-icon name="play" class="text-2xl"></ion-icon>
                         <span class="ml-3 font-medium">
                             Play
                         </span>
                     </button>
+                    </a>
                     <a href="{% url 'core:show_det' movie_id=show_case.uuid %}">
                     <button class="ml-4 text-white flex items-center bg-gray-500 bg-opacity-80 py-2 px-5 rounded-md">
                        
